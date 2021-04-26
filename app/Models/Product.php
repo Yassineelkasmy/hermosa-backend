@@ -22,15 +22,23 @@ class Product extends Model
     }
 
     public function colors() {
-        return $this->hasMany(Color::class)->withPivot('stock');
+        return $this->belongsToMany(Color::class)->withPivot('stock');
     }
 
     public function sizes() {
         return $this->hasMany(Size::class);
     }
 
+    public function getStockAttribute() {
+        $sum = 0;
+        foreach($this->colors as $color) {
+            $sum += $color->pivot->stock;
+        }
+
+        return $sum;
+    }
 
     protected $fillable = [
-        'title_fr','desc_fr','title_ar','desc_ar','price','stock',
+        'title_fr','desc_fr','title_ar','desc_ar','price',
     ];
 }

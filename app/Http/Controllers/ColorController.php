@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Color;
 use Illuminate\Http\Request;
 
 class ColorController extends Controller
@@ -13,7 +14,7 @@ class ColorController extends Controller
      */
     public function index()
     {
-        //
+        return view('colors.index',['colors'=>Color::all()]);
     }
 
     /**
@@ -34,7 +35,19 @@ class ColorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name_fr'=>'required',
+            'name_ar'=>'required',
+            'value'=>'required',
+        ]);
+
+        $data['value']= substr($data['value'], 1);
+        Color::create($data);
+        $request->session()->flash('status','Color was created !');
+        return redirect()->route('colors.index',);
+
+
+
     }
 
     /**

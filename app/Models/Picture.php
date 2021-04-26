@@ -12,7 +12,7 @@ class Picture extends Model
 
     public $timestamps = false;
     protected $fillable = [
-        'filename','color'
+        'filename','color_id'
       ];
 
     public function thumbnail_url() {
@@ -21,6 +21,7 @@ class Picture extends Model
     public function image_url() {
         return  asset("images/".$this->filename);
     }
+
 
 
 }

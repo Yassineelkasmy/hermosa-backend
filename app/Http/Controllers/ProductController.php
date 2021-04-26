@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Color;
 use App\Models\Picture;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -26,7 +27,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        return view('products.create',['colors'=>Color::all()]);
     }
 
     /**
@@ -43,7 +44,6 @@ class ProductController extends Controller
             'title_ar'=>'required|max:40',
             'desc_ar'=>'required|max:200',
             'price'=>'required|numeric',
-            'stock'=>'required|numeric',
             'filename'=>'required',
             'filename.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
 
@@ -51,11 +51,16 @@ class ProductController extends Controller
 
 
 
+
         $product = Product::create($validatedData);
+        $colors = Color::all();
+        $stock = $request->input('stock');
+
         if($request->hasfile('filename'))
+
         {
 
-            foreach($request->file('filename') as $file)
+            foreach($request->file('filename') as $key=>$file)
             {
 
                 $input['imagename'] = time().'.'.$file->extension();
@@ -68,8 +73,12 @@ class ProductController extends Controller
 
                 $destinationPath = public_path('images');
                 $file->move($destinationPath, $input['imagename']);
-                $picture = Picture::create(['filename'=>$input['imagename']]);
+                $color = $colors[$key];
+                $picture = Picture::create(['filename'=>$input['imagename'],'color_id'=>$color->id]);
                 $product->pictures()->save($picture);
+
+                $product->colors()->attach($color->id,['stock'=>$stock[$key]]);
+              //  $color->products()->attach($product->id,['stock'=>$stock[$key]]);
 
             }
         }

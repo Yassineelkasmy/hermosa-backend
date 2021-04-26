@@ -24,7 +24,9 @@ class CreatePicturesTable extends Migration
             $table->foreign('product_id')->references('id')
             ->on('products')->onDelete('cascade');
 
-            $table->string('color',20)->nullable();
+            $table->unsignedBigInteger('color_id')->nullable();
+
+
 
             $table->index('product_id');
         });

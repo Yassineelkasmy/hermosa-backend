@@ -13,12 +13,12 @@
     </div>
     <div class="col-4">
         <label for="">Name_ar</label>
-        <input class="form-control" type="text" name="name_ar">
+        <input class="form-control" required type="text" name="name_ar">
     </div>
 
     <div class="col-4">
         <label for="">Color</label>
-        <input class="form-control" name="value" type="color">
+        <input class="form-control" required name="value" type="color">
     </div>
 </div>
 

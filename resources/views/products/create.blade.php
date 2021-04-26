@@ -29,16 +29,12 @@
     </div>
     <div class="col-6">
         <label for="">Description_ar</label>
-        <input class="form-control" type="text" name="desc_ar"  required value "{{ old('descr_ar') }}">
+        <input class="form-control" type="text" name="desc_ar"  required value= "{{ old('desc_ar') }}">
     </div>
     </div>
 
     <div class="form-group">
         <div class="row">
-            <div class="col-6">
-        <label for="">Stock</label>
-        <input class="form-control" type="number" min='0' name='stock' required value="{{ old('stock') }}">
-    </div>
     <div class="col-6">
 
         <label for="">Price</label>
@@ -51,44 +47,45 @@
 
 
 
-    <label for="">Images</label>
-    <div class="input-group control-group increment" >
-        <input type="file" name="filename[]" class="form-control">
-          <button class="btn btn-success" type="button"> + Add</button>
+    <h2>Images</h2>
+    @foreach ($colors as $color )
+    <div class="row">
 
-    </div>
-      <div class="clone hide">
-        <div class="control-group input-group" style="margin-top:10px">
-          <input type="file" name="filename[]" class="form-control">
-
-            <button class="btn btn-danger" type="button"> - Remove</button>
+        <div class="col-3">
+            <input style="margin-top: 30px" type="file" name="filename[]">
+        </div>
+        <div class="col-3">
+            <label for="">Stock</label>
+        <input class="form-control" type="number" value="0" name="stock[]" min="0" step="1" value="{{ old('price') }}">
 
         </div>
-      </div>
+        <div class="col-3">
+            <h4 style="margin-top: 30px">
+                {{ $color->name_fr }} | {{ $color->name_ar }}
+            </h4>
+        </div>
+        <div class="col-3">
+        <div class="color" style="background-color: #<?php echo $color->value; ?>">
+
+        </div>
+    </div>
+    </div>
+    <hr>
+    @endforeach
     <button class='btn btn-primary btn-block' style="margin-top: 10px" type="submit">Create</button>
+    </div>
 </form>
 
-<script type="text/javascript">
-
-    $(document).ready(function() {
-
-      $(".btn-success").click(function(){
-          var html = $(".clone").html();
-          $(".increment").after(html);
-      });
-
-      $("body").on("click",".btn-danger",function(){
-          $(this).parents(".control-group").remove();
-      });
-
-    });
-
-</script>
 
 <style>
     .input-group button {
         width: 200px;
         margin-left:30px;
+    }
+    .color {
+        height: 40px;
+        width: 100%;
+        margin-top: 25px;
     }
 </style>
 
