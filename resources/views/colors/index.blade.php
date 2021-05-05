@@ -17,6 +17,9 @@
 </div>
 <hr>
 
+
+
+@endforeach
 <style>
     .view {
         height: 50px;
@@ -27,7 +30,4 @@
         margin: 10px;
     }
 </style>
-
-@endforeach
-
 @endsection

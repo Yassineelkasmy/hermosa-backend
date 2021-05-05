@@ -10,11 +10,11 @@ class Product extends Model
     use HasFactory;
 
     public function categories() {
-        return $this->hasMany(Category::class);
+        return $this->belongsToMany(Category::class);
     }
 
     public function tags() {
-        return $this->hasMany(Tag::class);
+        return $this->belongsToMany(Tag::class);
     }
 
     public function pictures() {
@@ -26,7 +26,7 @@ class Product extends Model
     }
 
     public function sizes() {
-        return $this->hasMany(Size::class);
+        return $this->belongsToMany(Size::class);
     }
 
     public function getStockAttribute() {
@@ -41,4 +41,14 @@ class Product extends Model
     protected $fillable = [
         'title_fr','desc_fr','title_ar','desc_ar','price',
     ];
+
+    public static function boot(){
+        parent::boot();
+        static::deleting(function ($product) {
+            $product->colors()->detach();
+            $product->sizes()->detach();
+            $product->categories()->detach();
+            $product->tags()->detach();
+        });
+    }
 }

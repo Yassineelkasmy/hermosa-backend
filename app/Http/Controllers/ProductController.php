@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Color;
+use App\Models\Size;
 use App\Models\Picture;
 use App\Models\Product;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
@@ -27,7 +30,12 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products.create',['colors'=>Color::all()]);
+        return view('products.create',[
+        'colors'=>Color::all(),
+        'sizes'=>Size::all(),
+        'categories'=>Category::all(),
+        'tags'=>Tag::all()
+        ]);
     }
 
     /**
@@ -44,16 +52,21 @@ class ProductController extends Controller
             'title_ar'=>'required|max:40',
             'desc_ar'=>'required|max:200',
             'price'=>'required|numeric',
+            'size'=>'required',
+            'category'=>'required',
+            'tag'=>'required',
             'filename'=>'required',
             'filename.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
 
         ]);
 
 
-
-
+        //dd($request->input('category'));
         $product = Product::create($validatedData);
         $colors = Color::all();
+        $categories = Category::all();
+        $sizes = Size::all();
+        $tags = Tag::all();
         $stock = $request->input('stock');
 
         if($request->hasfile('filename'))
@@ -67,7 +80,7 @@ class ProductController extends Controller
 
                 $destinationPath = public_path('thumbnails');
                 $img = Image::make($file->path());
-                $img->resize(400, 400, function ($constraint) {
+                $img->resize(500, 500, function ($constraint) {
                 $constraint->aspectRatio();
                 })->save($destinationPath.'/'.$input['imagename']);
 
@@ -82,7 +95,23 @@ class ProductController extends Controller
 
             }
         }
+        foreach ($request->input('category') as $key => $category) {
+            if($category) {
+                $product->categories()->attach($categories[$key]->id);
+            }
+        }
 
+        foreach ($request->input('size') as $key => $size) {
+            if($size) {
+                $product->sizes()->attach($sizes[$key]->id);
+            }
+        }
+
+        foreach ($request->input('tag') as $key => $tag) {
+            if($tag) {
+                $product->tags()->attach($tags[$key]->id);
+            }
+        }
         $request->session()->flash('status','Product was created !');
 
         return redirect()->route('products.show',['product'=>$product->id]);

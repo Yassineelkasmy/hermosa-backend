@@ -14,6 +14,9 @@ class Tag extends Model
     }
 
     protected $fillable = [
-        'name',
+        'name_fr','name_ar'
       ];
+
+    public $timestamps = false;
+
 }

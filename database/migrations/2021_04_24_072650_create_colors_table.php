@@ -18,7 +18,6 @@ class CreateColorsTable extends Migration
             $table->string('name_fr',20);
             $table->string('name_ar',20);
             $table->char('value',6);
-            $table->timestamps();
         });
     }
 

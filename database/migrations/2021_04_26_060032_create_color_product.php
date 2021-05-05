@@ -15,7 +15,9 @@ class CreateColorProduct extends Migration
     {
         Schema::create('color_product', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->foreignId('color_id')->constrained()->onDelete('cascade');
+            $table->foreignId('product_id')->constrained()->onDelete('cascade');
+            $table->integer('stock');
         });
     }
 

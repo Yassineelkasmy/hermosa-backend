@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,4 +27,6 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 Route::middleware('auth')->group(function () {
     Route::resource('/products', ProductController::class);
     Route::resource('/colors', ColorController::class);
+    Route::resource('/categories', CategoryController::class);
+    Route::resource('/tags', TagController::class);
 });

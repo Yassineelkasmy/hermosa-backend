@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->string('title_ar',40);
             $table->text('desc_ar');
             $table->double('price');
+            $table->boolean('available')->default(true);
             $table->timestamps();
         });
     }

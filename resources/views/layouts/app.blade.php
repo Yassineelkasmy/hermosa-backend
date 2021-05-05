@@ -18,6 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+
 </head>
 <body>
     <div id="app">
@@ -39,11 +40,27 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('colors.index') }}">Colors</a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('categories.index') }}">Categories</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('tags.index') }}">Tags</a>
+                        </li>
+
                          <li class="nav-item">
                             <a class="nav-link" href="{{ route('products.create') }}">Add product</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('colors.create') }}">Add color</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('categories.create') }}">Add category</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('tags.create') }}">Add tag</a>
                         </li>
 
                     </ul>
@@ -115,3 +132,4 @@
 
 </body>
 </html>
+

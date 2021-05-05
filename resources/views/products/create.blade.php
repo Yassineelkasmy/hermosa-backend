@@ -56,7 +56,7 @@
         </div>
         <div class="col-3">
             <label for="">Stock</label>
-        <input class="form-control" type="number" value="0" name="stock[]" min="0" step="1" value="{{ old('price') }}">
+        <input class="form-control" type="number" value="0" name="stock[]" min="0" step="1" >
 
         </div>
         <div class="col-3">
@@ -72,21 +72,41 @@
     </div>
     <hr>
     @endforeach
+    <h2>Sizes</h2>
+    <div class="row">
+    @foreach ($sizes as $size)
+        <div class="col-md-3 col-sm-6">
+        <label for="">{{ strtoupper($size->name)  }}</label>
+        <input type="checkbox" name="size[]">
+        </div>
+
+    @endforeach
+    </div>
+
+    <hr>
+    <h2>Categories</h2>
+    <div class="row">
+        @foreach ($categories as $category)
+            <div class="col-md-3 col-sm-6">
+            <label for="">{{ ucfirst($category->name_fr) }} | {{  $category->name_ar}}</label>
+            <input type="checkbox" name="category[]">
+        </div>
+        @endforeach
+    </div>
+    <hr>
+    <h2>Tags</h2>
+    <div class="row">
+        @foreach ($tags as $tag)
+            <div class="col-md-3 col-sm-6">
+            <label for="">{{ ucfirst($tag->name_fr) }} | {{  $tag->name_ar}}</label>
+            <input type="checkbox" name="tag[]">
+        </div>
+        @endforeach
+
     <button class='btn btn-primary btn-block' style="margin-top: 10px" type="submit">Create</button>
     </div>
 </form>
 
 
-<style>
-    .input-group button {
-        width: 200px;
-        margin-left:30px;
-    }
-    .color {
-        height: 40px;
-        width: 100%;
-        margin-top: 25px;
-    }
-</style>
 
 @endsection
