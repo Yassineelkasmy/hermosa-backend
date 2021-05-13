@@ -16,6 +16,6 @@ class Color extends Model
     }
 
     protected $fillable = [
-        'name_fr', 'name_ar' , 'value',
+        'nameFr', 'nameAr' , 'value',
     ];
 }

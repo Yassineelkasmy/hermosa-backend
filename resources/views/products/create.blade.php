@@ -9,13 +9,13 @@
     <div class="row">
 
         <div class="col-6">
-            <label for="">Title_fr</label>
-            <input class="form-control" type="text" name='title_fr' required value="{{ old('title_fr') }}">
+            <label for="">TitleFr</label>
+            <input class="form-control" type="text" name='titleFr' required value="{{ old('titleFr') }}">
         </div>
 
         <div class="col-6">
-            <label for="">Title_ar</label>
-            <input class="form-control" type="text" name='title_ar' required value="{{ old('title_ar') }}">
+            <label for="">TitleAr</label>
+            <input class="form-control" type="text" name='titleAr' required value="{{ old('titleAr') }}">
         </div>
     </div>
     </div>
@@ -24,12 +24,12 @@
     <div class="form-group">
         <div class="row">
         <div class="col-6">
-        <label for="">Description_fr</label>
-        <input class="form-control" type="text" name="desc_fr"  required value=" {{ old('desc_fr') }}">
+        <label for="">DescriptionFr</label>
+        <input class="form-control" type="text" name="descFr"  required value=" {{ old('descFr') }}">
     </div>
     <div class="col-6">
-        <label for="">Description_ar</label>
-        <input class="form-control" type="text" name="desc_ar"  required value= "{{ old('desc_ar') }}">
+        <label for="">DescriptionAr</label>
+        <input class="form-control" type="text" name="descAr"  required value= "{{ old('descAr') }}">
     </div>
     </div>
 
@@ -56,12 +56,12 @@
         </div>
         <div class="col-3">
             <label for="">Stock</label>
-        <input class="form-control" type="number" value="0" name="stock[]" min="0" step="1" >
+        <input class="form-control" type="number" value="0" name="color_stock[]" min="0" step="1" >
 
         </div>
         <div class="col-3">
             <h4 style="margin-top: 30px">
-                {{ $color->name_fr }} | {{ $color->name_ar }}
+                {{ $color->nameFr }} | {{ $color->nameAr }}
             </h4>
         </div>
         <div class="col-3">
@@ -77,7 +77,7 @@
     @foreach ($sizes as $size)
         <div class="col-md-3 col-sm-6">
         <label for="">{{ strtoupper($size->name)  }}</label>
-        <input type="checkbox" name="size[]">
+        <input class="form-control" type="number" value="0" name="size_stock[]" min="0" step="1" >
         </div>
 
     @endforeach
@@ -88,20 +88,12 @@
     <div class="row">
         @foreach ($categories as $category)
             <div class="col-md-3 col-sm-6">
-            <label for="">{{ ucfirst($category->name_fr) }} | {{  $category->name_ar}}</label>
+            <label for="">{{ ucfirst($category->nameFr) }} | {{  $category->nameAr}}</label>
             <input type="checkbox" name="category[]">
         </div>
         @endforeach
     </div>
-    <hr>
-    <h2>Tags</h2>
-    <div class="row">
-        @foreach ($tags as $tag)
-            <div class="col-md-3 col-sm-6">
-            <label for="">{{ ucfirst($tag->name_fr) }} | {{  $tag->name_ar}}</label>
-            <input type="checkbox" name="tag[]">
-        </div>
-        @endforeach
+
 
     <button class='btn btn-primary btn-block' style="margin-top: 10px" type="submit">Create</button>
     </div>

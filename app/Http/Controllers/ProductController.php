@@ -34,7 +34,6 @@ class ProductController extends Controller
         'colors'=>Color::all(),
         'sizes'=>Size::all(),
         'categories'=>Category::all(),
-        'tags'=>Tag::all()
         ]);
     }
 
@@ -47,14 +46,12 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'title_fr'=>'required|max:40',
-            'desc_fr'=>'required|max:200',
-            'title_ar'=>'required|max:40',
-            'desc_ar'=>'required|max:200',
+            'titleFr'=>'required|max:40',
+            'descFr'=>'required|max:200',
+            'titleAr'=>'required|max:40',
+            'descAr'=>'required|max:200',
             'price'=>'required|numeric',
-            'size'=>'required',
             'category'=>'required',
-            'tag'=>'required',
             'filename'=>'required',
             'filename.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
 
@@ -66,8 +63,8 @@ class ProductController extends Controller
         $colors = Color::all();
         $categories = Category::all();
         $sizes = Size::all();
-        $tags = Tag::all();
-        $stock = $request->input('stock');
+        $color_stock = $request->input('color_stock');
+        $size_stock = $request->input('size_stock');
 
         if($request->hasfile('filename'))
 
@@ -90,9 +87,16 @@ class ProductController extends Controller
                 $picture = Picture::create(['filename'=>$input['imagename'],'color_id'=>$color->id]);
                 $product->pictures()->save($picture);
 
-                $product->colors()->attach($color->id,['stock'=>$stock[$key]]);
-              //  $color->products()->attach($product->id,['stock'=>$stock[$key]]);
+                $product->colors()->attach($color->id,['stock'=>$color_stock[$key]]);
 
+              //  $color->products()->attach($product->id,['stock'=>$color_stock[$key]]);
+
+            }
+
+            foreach($sizes as $key=>$size) {
+                if($size_stock[$key]!=0) {
+                    $product->sizes()->attach($size->id,['stock'=>$size_stock[$key]]);
+                }
             }
         }
         foreach ($request->input('category') as $key => $category) {
@@ -101,17 +105,9 @@ class ProductController extends Controller
             }
         }
 
-        foreach ($request->input('size') as $key => $size) {
-            if($size) {
-                $product->sizes()->attach($sizes[$key]->id);
-            }
-        }
 
-        foreach ($request->input('tag') as $key => $tag) {
-            if($tag) {
-                $product->tags()->attach($tags[$key]->id);
-            }
-        }
+
+
         $request->session()->flash('status','Product was created !');
 
         return redirect()->route('products.show',['product'=>$product->id]);

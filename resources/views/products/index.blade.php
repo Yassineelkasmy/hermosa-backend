@@ -36,7 +36,8 @@
             <div class="col-3 col-sm-6">
                 <div class="view" style="background-color: #<?php echo $color->value; ?>">
 
-                    <span>{{ $color->name_fr }} | {{ $color->name_ar }}</span>
+                    <span>{{ $color->name_fr."|".$color->name_ar }}
+                                <strong>{{ $color->pivot->stock }}</strong></span>
 
                 </div>
             </div>
@@ -49,7 +50,7 @@
         @foreach ($product->sizes as $size )
             <div class="col">
                 <div class="btn btn-info my-1">
-                    {{ $size->name }}
+                    {{ $size->name." | ".$size->pivot->stock }}
             </div>
             </div>
 
@@ -61,26 +62,15 @@
         @foreach ($product->categories as $category )
             <div class="col">
                 <div class="btn btn-warning my-1">
-                    {{ $category->name_fr }} | {{ $category->name_ar }}
+                    {{$category->name_fr." | ".$category->name_ar}}
                 </div>
 
-
-
             </div>
 
         @endforeach
     </div>
 
-    <div class="row">
-        @foreach ($product->tags as $tag )
-            <div class="col">
-                <div class="btn btn-dark my-1">
-                    {{ $tag->name_fr }} | {{ $tag->name_ar }}
-            </div>
-            </div>
 
-        @endforeach
-    </div>
 
 
 
@@ -104,7 +94,8 @@
 
     span{
         position: absolute;
-        left: 60px;
+        left: 50px;
+        width: auto;
     }
 
 </style>

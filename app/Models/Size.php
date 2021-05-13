@@ -11,6 +11,6 @@ class Size extends Model
 
     public $timestamps = false;
     public function products() {
-        return $this->belongsToMany(Product::class);
+        return $this->belongsToMany(Product::class)->withPivot('stock');
     }
 }

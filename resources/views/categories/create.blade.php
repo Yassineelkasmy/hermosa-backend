@@ -8,12 +8,12 @@
     <div class="form-group">
         <div class="row">
             <div class="col-6">
-        <label for="">Name_fr</label>
-        <input class="form-control" type="text" name="name_fr">
+        <label for="">NameFr</label>
+        <input class="form-control" type="text" name="nameFr">
     </div>
     <div class="col-6">
-        <label for="">Name_ar</label>
-        <input class="form-control" required type="text" name="name_ar">
+        <label for="">NameAr</label>
+        <input class="form-control" required type="text" name="nameAr">
     </div>
 
 

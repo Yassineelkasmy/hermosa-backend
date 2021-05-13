@@ -6,7 +6,7 @@
     <div class="row">
     <div class="col-6">
         <h2>
-        {{ $color->name_fr }} | {{ $color->name_fr }}
+        {{ $color->nameFr }} | {{ $color->nameAr }}
     </h2>
     </div>
     <div class="col-6">

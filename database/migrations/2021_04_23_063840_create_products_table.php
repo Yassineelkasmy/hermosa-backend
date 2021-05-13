@@ -15,11 +15,12 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('title_fr',40);
-            $table->text('desc_fr');
-            $table->string('title_ar',40);
-            $table->text('desc_ar');
+            $table->string('titleFr',40);
+            $table->text('descFr');
+            $table->string('titleAr',40);
+            $table->text('descAr');
             $table->double('price');
+            $table->integer('views')->default(0);
             $table->boolean('available')->default(true);
             $table->timestamps();
         });

@@ -36,8 +36,8 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name_fr'=>'required',
-            'name_ar'=>'required',
+            'nameFr'=>'required',
+            'nameAr'=>'required',
         ]);
 
         Category::create($data);

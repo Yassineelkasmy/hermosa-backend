@@ -28,5 +28,4 @@ Route::middleware('auth')->group(function () {
     Route::resource('/products', ProductController::class);
     Route::resource('/colors', ColorController::class);
     Route::resource('/categories', CategoryController::class);
-    Route::resource('/tags', TagController::class);
 });

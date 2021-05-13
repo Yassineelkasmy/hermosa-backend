@@ -26,7 +26,7 @@ class Product extends Model
     }
 
     public function sizes() {
-        return $this->belongsToMany(Size::class);
+        return $this->belongsToMany(Size::class)->withPivot('stock');
     }
 
     public function getStockAttribute() {
@@ -39,7 +39,7 @@ class Product extends Model
     }
 
     protected $fillable = [
-        'title_fr','desc_fr','title_ar','desc_ar','price',
+        'titleFr','descFr','titleAr','descAr','price',
     ];
 
     public static function boot(){
